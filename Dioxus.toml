@@ -12,7 +12,7 @@ title = "intear-wallet-connect-demo"
 style = []
 
 # Additional JavaScript files
-script = ["/assets/near_client.js"]
+script = []
 
 [web.resource.dev]
 
