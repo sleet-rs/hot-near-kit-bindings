@@ -1,4 +1,4 @@
-use crate::near::near_client::{
+use crate::near::near_kit_hot_connect::{
     near_account_id, near_auth_status, near_request_sign_in, near_sign_out,
 };
 use dioxus::prelude::*;

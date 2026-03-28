@@ -1,7 +1,7 @@
 // hot_near_kit_bindings
 // ===========================================
 pub mod near {
-    pub mod near_client;
+    pub mod near_kit_hot_connect;
 }
 pub mod ui {
     pub mod button_login;
