@@ -1,0 +1,6 @@
+# netlify.toml
+[build]
+  # The command that builds your project
+  command = "dx bundle --platform web"
+  # The directory to publish (upload) to Netlify
+  publish = "target/dx/hot-near-kit-bindings/debug/web/public"

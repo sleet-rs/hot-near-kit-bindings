@@ -35,6 +35,11 @@ cargo publish
 # docs
 cargo doc --no-deps
 cargo doc --open
+
+# netlify
+# hot-near-kit-bindings
+netlify deploy
+netlify deploy --prod
 ```
 
 ---
