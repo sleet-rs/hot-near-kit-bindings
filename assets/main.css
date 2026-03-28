@@ -1,0 +1,10 @@
+/* main.css  */
+/* import other css here */
+/*==================================================================*/
+/* css  */
+@import url("https://cdn.jsdelivr.net/npm/@sleet-css/sleet-css/css/main.css");
+/*==================================================================*/
+button {
+    width: 500px;
+    max-width: 90vw;
+}
