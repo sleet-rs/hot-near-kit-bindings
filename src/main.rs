@@ -27,21 +27,16 @@ fn App() -> Element {
 pub fn Hero() -> Element {
     rsx! {
         section {
-            h1 { "fastintear-rs-bindings" }
-            p { "🦀 use fastintear in rust with your dioxus web app" }
+            h1 { "hot-near-kit-bindings" }
+            p { "🦀 rust bindings for a custom near kit and near connect client" }
             div {
                 id: "demo_div",
                 button_login {}
+                br {  }
                 button_network {}
             }
 
             p {
-                "🐱 "
-                    a {
-                        href: "https://github.com/sleet-rs/fastintear-rs-bindings",
-                        "github"
-                    }
-                    br {  }
                 "copyright 2026 by sleet.near"
             }
         }

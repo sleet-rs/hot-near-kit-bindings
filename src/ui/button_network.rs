@@ -22,7 +22,7 @@ pub fn button_network() -> Element {
             "mainnet"
         };
         network_id.set(new_network.to_string());
-        
+
         if let Some(storage) = web_sys::window().unwrap().local_storage().unwrap() {
             let _ = storage.set_item(NETWORK_STORAGE_KEY, new_network);
         }
