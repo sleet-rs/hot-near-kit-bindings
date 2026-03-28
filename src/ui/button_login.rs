@@ -10,13 +10,17 @@ pub fn button_login() -> Element {
 
     use_effect(move || {
         wasm_bindgen_futures::spawn_local(async move {
-            let status = near_auth_status();
-            let signed_in = status == "SignedIn";
-            is_signed_in.set(signed_in);
-            if signed_in {
-                account_id.set(Some(near_account_id()));
-            } else {
-                account_id.set(None);
+            if let Ok(status) = near_auth_status().await {
+                let status_str = status.as_string().unwrap_or_default();
+                let signed_in = status_str == "SignedIn";
+                is_signed_in.set(signed_in);
+                if signed_in {
+                    if let Ok(acc_id) = near_account_id().await {
+                        account_id.set(Some(acc_id.as_string().unwrap_or_default()));
+                    }
+                } else {
+                    account_id.set(None);
+                }
             }
         });
     });
@@ -24,13 +28,17 @@ pub fn button_login() -> Element {
     let on_login = move |_| {
         wasm_bindgen_futures::spawn_local(async move {
             if near_request_sign_in().await.is_ok() {
-                let status = near_auth_status();
-                let signed_in = status == "SignedIn";
-                is_signed_in.set(signed_in);
-                if signed_in {
-                    account_id.set(Some(near_account_id()));
-                } else {
-                    account_id.set(None);
+                if let Ok(status) = near_auth_status().await {
+                    let status_str = status.as_string().unwrap_or_default();
+                    let signed_in = status_str == "SignedIn";
+                    is_signed_in.set(signed_in);
+                    if signed_in {
+                        if let Ok(acc_id) = near_account_id().await {
+                            account_id.set(Some(acc_id.as_string().unwrap_or_default()));
+                        }
+                    } else {
+                        account_id.set(None);
+                    }
                 }
             }
         });
