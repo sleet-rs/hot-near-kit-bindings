@@ -1,7 +1,7 @@
 use dioxus::prelude::*;
-use fastintear_rs_bindings::logic::hello::hello;
-use fastintear_rs_bindings::ui::button_login::button_login;
-use fastintear_rs_bindings::ui::button_network::button_network;
+use hot_near_kit_bindings::logic::hello::hello;
+use hot_near_kit_bindings::ui::button_login::button_login;
+use hot_near_kit_bindings::ui::button_network::button_network;
 // ===========================================
 const FAVICON: Asset = asset!("/assets/icon.svg");
 const MAIN_CSS: Asset = asset!("/assets/main.css");

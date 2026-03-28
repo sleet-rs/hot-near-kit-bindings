@@ -1,10 +1,10 @@
 [package]
-name = "fastintear-rs-bindings"
-description = "🦀 use fastintear in rust with your dioxus web app"
+name = "hot-near-kit-bindings"
+description = "🦀 rust bindings for a custom near kit and near connect client"
 version = "0.1.0"
 license = "MIT"
 homepage = "https://github.com/sleet-rs"
-repository = "https://github.com/sleet-rs/fastintear-rs-bindings"
+repository = "https://github.com/sleet-rs/hot-near-kit-bindings"
 authors = ["Nathan Renfroe <thesunshiningmin@gmail.com>"]
 edition = "2021"
 include = [

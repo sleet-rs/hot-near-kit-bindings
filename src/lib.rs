@@ -1,4 +1,4 @@
-// fastintear_rs_bindings
+// hot_near_kit_bindings
 // ===========================================
 pub mod near {
     pub mod near_client;

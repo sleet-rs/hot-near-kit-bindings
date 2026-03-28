@@ -1,11 +1,6 @@
-# fastintear-rs-bindings
-🦀 use fastintear in rust with your dioxus web app
+# hot-near-kit-bindings
+🦀 rust bindings for a custom near kit and near connect client
 
-ℹ️ no tx support yet!
-
-ℹ️ fastintear: https://github.com/elliotBraem/fastintear
-<br/>
-ℹ️ custom fastntear client: https://github.com/sleet-js/fastintear-custom-client-setup-with-other-custom-functions
 
 ---
 
@@ -47,7 +42,7 @@ cargo doc --open
 #### use this crate
 
 ```sh
-cargo add fastintear-rs-bindings
+cargo add hot-near-kit-bindings
 ```
 
 
