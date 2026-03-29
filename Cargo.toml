@@ -27,3 +27,9 @@ web = ["dioxus/web"]
 desktop = ["dioxus/desktop"]
 mobile = ["dioxus/mobile"]
 # ===========================================
+# [profile.release]
+# opt-level = "z"
+# debug = 0
+# lto = true
+# codegen-units = 1 
+# ===========================================

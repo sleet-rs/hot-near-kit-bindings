@@ -16,7 +16,7 @@ dx serve --platform web
 # dx serve --platform desktop
 # bundle
 dx bundle --platform web
-dx build --release
+dx bundle --release
 # dx bundle --platform desktop
 
 # CARGO COMMANDS
