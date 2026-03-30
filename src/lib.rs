@@ -12,5 +12,6 @@ pub mod logic {
     pub mod hello;
     pub mod network;
     pub mod contract_hello;
+    pub mod contract_wrap;
 }
 // ===========================================
