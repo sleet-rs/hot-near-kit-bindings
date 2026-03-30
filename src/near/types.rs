@@ -92,7 +92,10 @@ impl PublicKey {
                     .into_vec()
                     .map_err(|e| format!("invalid secp256k1 key: {e}"))?;
                 if bytes.len() != 64 {
-                    return Err(format!("secp256k1 key must be 64 bytes, got {}", bytes.len()));
+                    return Err(format!(
+                        "secp256k1 key must be 64 bytes, got {}",
+                        bytes.len()
+                    ));
                 }
                 let mut arr = [0u8; 64];
                 arr.copy_from_slice(&bytes);
@@ -280,11 +283,9 @@ impl<'de> serde::Deserialize<'de> for ExecutionStatus {
         match Raw::deserialize(deserializer)? {
             Raw::Unknown => Ok(Self::Unknown),
             Raw::Failure(TxExecutionError::ActionError(e)) => Ok(Self::Failure(e)),
-            Raw::Failure(TxExecutionError::InvalidTxError(e)) => Err(
-                serde::de::Error::custom(format!(
-                    "unexpected InvalidTxError in receipt execution status: {e}"
-                )),
-            ),
+            Raw::Failure(TxExecutionError::InvalidTxError(e)) => Err(serde::de::Error::custom(
+                format!("unexpected InvalidTxError in receipt execution status: {e}"),
+            )),
             Raw::SuccessValue(v) => Ok(Self::SuccessValue(v)),
             Raw::SuccessReceiptId(h) => Ok(Self::SuccessReceiptId(h)),
         }
@@ -322,23 +323,21 @@ pub struct GasProfileEntry {
     pub gas_used: Gas,
 }
 
-fn gas_dec_format<'de, D: serde::Deserializer<'de>>(
-    deserializer: D,
-) -> Result<Gas, D::Error> {
+fn gas_dec_format<'de, D: serde::Deserializer<'de>>(deserializer: D) -> Result<Gas, D::Error> {
     use serde::de::Error;
-    
+
     #[derive(Deserialize)]
     #[serde(untagged)]
     enum GasValue {
         String(String),
         Number(u64),
     }
-    
+
     let value = match GasValue::deserialize(deserializer)? {
         GasValue::String(s) => s.parse::<u64>().map_err(Error::custom)?,
         GasValue::Number(n) => n,
     };
-    
+
     Ok(Gas::from_gas(value))
 }
 
@@ -351,14 +350,18 @@ fn gas_dec_format<'de, D: serde::Deserializer<'de>>(
 #[serde(rename_all = "PascalCase")]
 pub enum ActionView {
     CreateAccount,
-    DeployContract { code: String },
+    DeployContract {
+        code: String,
+    },
     FunctionCall {
         method_name: String,
         args: String,
         gas: Gas,
         deposit: NearToken,
     },
-    Transfer { deposit: NearToken },
+    Transfer {
+        deposit: NearToken,
+    },
     Stake {
         stake: NearToken,
         public_key: PublicKey,
@@ -367,20 +370,32 @@ pub enum ActionView {
         public_key: PublicKey,
         access_key: AccessKeyDetails,
     },
-    DeleteKey { public_key: PublicKey },
-    DeleteAccount { beneficiary_id: AccountId },
+    DeleteKey {
+        public_key: PublicKey,
+    },
+    DeleteAccount {
+        beneficiary_id: AccountId,
+    },
     Delegate {
         delegate_action: DelegateActionView,
         signature: Signature,
     },
     #[serde(rename = "DeployGlobalContract")]
-    DeployGlobalContract { code: String },
+    DeployGlobalContract {
+        code: String,
+    },
     #[serde(rename = "DeployGlobalContractByAccountId")]
-    DeployGlobalContractByAccountId { code: String },
+    DeployGlobalContractByAccountId {
+        code: String,
+    },
     #[serde(rename = "UseGlobalContract")]
-    UseGlobalContract { code_hash: CryptoHash },
+    UseGlobalContract {
+        code_hash: CryptoHash,
+    },
     #[serde(rename = "UseGlobalContractByAccountId")]
-    UseGlobalContractByAccountId { account_id: AccountId },
+    UseGlobalContractByAccountId {
+        account_id: AccountId,
+    },
     #[serde(rename = "DeterministicStateInit")]
     DeterministicStateInit {
         code: GlobalContractIdentifierView,
@@ -503,8 +518,12 @@ impl std::fmt::Display for ActionError {
 /// Specific kind of action error.
 #[derive(Debug, Clone, Deserialize)]
 pub enum ActionErrorKind {
-    AccountAlreadyExists { account_id: AccountId },
-    AccountDoesNotExist { account_id: AccountId },
+    AccountAlreadyExists {
+        account_id: AccountId,
+    },
+    AccountDoesNotExist {
+        account_id: AccountId,
+    },
     CreateAccountOnlyByRegistrar {
         account_id: AccountId,
         predecessor_id: AccountId,
@@ -526,12 +545,16 @@ pub enum ActionErrorKind {
         account_id: AccountId,
         public_key: PublicKey,
     },
-    DeleteAccountStaking { account_id: AccountId },
+    DeleteAccountStaking {
+        account_id: AccountId,
+    },
     LackBalanceForState {
         account_id: AccountId,
         amount: NearToken,
     },
-    TriesToUnstake { account_id: AccountId },
+    TriesToUnstake {
+        account_id: AccountId,
+    },
     TriesToStake {
         account_id: AccountId,
         balance: NearToken,
@@ -545,8 +568,12 @@ pub enum ActionErrorKind {
     },
     FunctionCallError(FunctionCallError),
     NewReceiptValidationError(ReceiptValidationError),
-    OnlyImplicitAccountCreationAllowed { account_id: AccountId },
-    DeleteAccountWithLargeState { account_id: AccountId },
+    OnlyImplicitAccountCreationAllowed {
+        account_id: AccountId,
+    },
+    DeleteAccountWithLargeState {
+        account_id: AccountId,
+    },
     DelegateActionInvalidSignature,
     DelegateActionSenderDoesNotMatchTxReceiver {
         receiver_id: AccountId,
@@ -599,11 +626,23 @@ impl std::fmt::Display for ActionErrorKind {
 #[derive(Debug, Clone, Deserialize)]
 pub enum InvalidTxError {
     InvalidAccessKeyError(InvalidAccessKeyError),
-    InvalidSignerId { signer_id: String },
-    SignerDoesNotExist { signer_id: AccountId },
-    InvalidNonce { ak_nonce: u64, tx_nonce: u64 },
-    NonceTooLarge { tx_nonce: u64, upper_bound: u64 },
-    InvalidReceiverId { receiver_id: String },
+    InvalidSignerId {
+        signer_id: String,
+    },
+    SignerDoesNotExist {
+        signer_id: AccountId,
+    },
+    InvalidNonce {
+        ak_nonce: u64,
+        tx_nonce: u64,
+    },
+    NonceTooLarge {
+        tx_nonce: u64,
+        upper_bound: u64,
+    },
+    InvalidReceiverId {
+        receiver_id: String,
+    },
     InvalidSignature,
     NotEnoughBalance {
         balance: NearToken,
@@ -618,7 +657,10 @@ pub enum InvalidTxError {
     InvalidChain,
     Expired,
     ActionsValidation(ActionsValidationError),
-    TransactionSizeExceeded { limit: u64, size: u64 },
+    TransactionSizeExceeded {
+        limit: u64,
+        size: u64,
+    },
     InvalidTransactionVersion,
     StorageError(StorageError),
     ShardCongested {
@@ -665,7 +707,9 @@ pub enum InvalidAccessKeyError {
         ak_receiver: String,
         tx_receiver: AccountId,
     },
-    MethodNameMismatch { method_name: String },
+    MethodNameMismatch {
+        method_name: String,
+    },
     RequiresFullAccess,
     NotEnoughAllowance {
         account_id: AccountId,
@@ -689,7 +733,9 @@ pub enum FunctionCallError {
     #[serde(rename = "_EVMError")]
     EvmError,
     CompilationError(CompilationError),
-    LinkError { msg: String },
+    LinkError {
+        msg: String,
+    },
     MethodResolveError(MethodResolveError),
     WasmTrap(WasmTrap),
     HostError(HostError),
@@ -860,18 +906,34 @@ impl std::fmt::Display for ActionsValidationError {
 /// Receipt validation error.
 #[derive(Debug, Clone, Deserialize)]
 pub enum ReceiptValidationError {
-    InvalidPredecessorId { account_id: String },
-    InvalidReceiverId { account_id: String },
-    InvalidSignerId { account_id: String },
-    InvalidDataReceiverId { account_id: String },
-    ReturnedValueLengthExceeded { length: u64, limit: u64 },
+    InvalidPredecessorId {
+        account_id: String,
+    },
+    InvalidReceiverId {
+        account_id: String,
+    },
+    InvalidSignerId {
+        account_id: String,
+    },
+    InvalidDataReceiverId {
+        account_id: String,
+    },
+    ReturnedValueLengthExceeded {
+        length: u64,
+        limit: u64,
+    },
     NumberInputDataDependenciesExceeded {
         limit: u64,
         number_of_input_data_dependencies: u64,
     },
     ActionsValidation(ActionsValidationError),
-    ReceiptSizeExceeded { limit: u64, size: u64 },
-    InvalidRefundTo { account_id: String },
+    ReceiptSizeExceeded {
+        limit: u64,
+        size: u64,
+    },
+    InvalidRefundTo {
+        account_id: String,
+    },
 }
 
 impl std::fmt::Display for ReceiptValidationError {
