@@ -2047,6 +2047,7 @@ dependencies = [
  "near-gas",
  "near-token",
  "serde",
+ "serde-wasm-bindgen",
  "serde_json",
  "wasm-bindgen",
  "wasm-bindgen-futures",
