@@ -8,6 +8,7 @@
     border-radius: 8px;
     width: 500px;
     max-width: 90vw;
+    box-sizing: border-box;
 }
 
 .greeting-input {
