@@ -2,6 +2,8 @@
 //!
 //! This module contains types needed to work with NEAR transaction execution results,
 //! copied from near-kit-rs for use in hot-near-kit-bindings.
+//! 
+//! the specific type I want is "FinalExecutionOutcome"
 
 use serde::Deserialize;
 use std::collections::BTreeMap;
@@ -977,3 +979,4 @@ pub struct StateNotFound {
 pub struct FlatStateNotFound {
     pub hash: CryptoHash,
 }
+// ============================================================================
