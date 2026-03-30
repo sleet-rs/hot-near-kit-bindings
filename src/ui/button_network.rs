@@ -1,40 +1,32 @@
+use crate::logic::network::{
+    get_stored_network_id, save_network_id, toggle_network,
+};
 use dioxus::prelude::*;
 use web_sys::console;
-// ===========================================
-const NETWORK_STORAGE_KEY: &str = "network_id";
-// ===========================================
+
 #[component]
 pub fn button_network() -> Element {
-    let mut network_id = use_signal(|| "mainnet".to_string());
+    let mut network_id = use_signal(|| get_stored_network_id());
 
     use_effect(move || {
-        if let Some(storage) = web_sys::window().unwrap().local_storage().unwrap() {
-            if let Ok(Some(saved)) = storage.get_item(NETWORK_STORAGE_KEY) {
-                network_id.set(saved);
-            }
-        }
+        network_id.set(get_stored_network_id());
     });
 
-    let toggle_network = move |_| {
-        let new_network = if network_id() == "mainnet" {
-            "testnet"
-        } else {
-            "mainnet"
-        };
-        network_id.set(new_network.to_string());
+    let toggle_network_handler = move |_| {
+        let new_network = toggle_network(network_id());
+        network_id.set(new_network);
 
-        if let Some(storage) = web_sys::window().unwrap().local_storage().unwrap() {
-            let _ = storage.set_item(NETWORK_STORAGE_KEY, new_network);
+        if let Err(e) = save_network_id(new_network) {
+            console::error_1(&e);
         }
 
-        console::log_1(&format!("{}", new_network).into());
+        console::log_1(&format!("{}", new_network.as_str()).into());
     };
 
     rsx! {
         button {
-            onclick: toggle_network,
-            "{network_id().to_uppercase()}"
+            onclick: toggle_network_handler,
+            "{network_id().as_str().to_uppercase()}"
         }
     }
 }
-// ===========================================
