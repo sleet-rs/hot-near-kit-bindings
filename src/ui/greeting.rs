@@ -1,3 +1,4 @@
+use crate::logic::contract_hello::hello_contract_id_for_network;
 use crate::near::near_kit_hot_greeting;
 use dioxus::prelude::*;
 // ===========================================
@@ -14,7 +15,8 @@ pub fn Greeting() -> Element {
             error.set(None);
             message.set("Loading greeting...".to_string());
 
-            match near_kit_hot_greeting::get_greeting("hello.sleet.testnet").await {
+            let contract_id = hello_contract_id_for_network();
+            match near_kit_hot_greeting::get_greeting(contract_id).await {
                 Ok(result) => {
                     greeting.set(result.clone());
                     message.set(format!("Greeting: {}", result));
@@ -40,7 +42,8 @@ pub fn Greeting() -> Element {
             error.set(None);
             message.set("Setting greeting...".to_string());
 
-            match near_kit_hot_greeting::set_greeting("hello.sleet.testnet", &greeting_value).await {
+            let contract_id = hello_contract_id_for_network();
+            match near_kit_hot_greeting::set_greeting(contract_id, &greeting_value).await {
                 Ok(outcome) => {
                     if outcome.is_success() {
                         message.set(format!("✓ Greeting set to: {}", greeting_value));
