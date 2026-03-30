@@ -2,7 +2,7 @@ use crate::near::near_kit_hot_greeting;
 use dioxus::prelude::*;
 // ===========================================
 #[component]
-pub fn greeting() -> Element {
+pub fn Greeting() -> Element {
     let mut greeting = use_signal(|| String::new());
     let mut message = use_signal(|| String::new());
     let mut error = use_signal(|| Option::<String>::None);

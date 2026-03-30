@@ -2,6 +2,7 @@ use dioxus::prelude::*;
 use hot_near_kit_bindings::logic::hello::hello;
 use hot_near_kit_bindings::ui::button_login::button_login;
 use hot_near_kit_bindings::ui::button_network::button_network;
+use hot_near_kit_bindings::ui::greeting::Greeting;
 // ===========================================
 const FAVICON: Asset = asset!("/assets/icon.svg");
 const MAIN_CSS: Asset = asset!("/assets/main.css");
@@ -34,6 +35,8 @@ pub fn Hero() -> Element {
                 button_login {}
                 br {  }
                 button_network {}
+                br {  }
+                Greeting {}
             }
 
             p {
