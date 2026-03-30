@@ -60,8 +60,7 @@ pub fn Greeting() -> Element {
     };
 
     rsx! {
-        div {
-            style: "padding: 16px; border: 1px solid #ccc; border-radius: 8px; max-width: 400px;",
+        div { class: "greeting-container",
             h3 { "Greeting Contract" }
 
             input {
@@ -69,35 +68,33 @@ pub fn Greeting() -> Element {
                 value: "{greeting}",
                 oninput: move |e| greeting.set(e.value()),
                 placeholder: "Enter greeting",
-                style: "width: 100%; padding: 8px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 4px;",
+                class: "greeting-input",
             }
 
-            div { style: "display: flex; gap: 8px; margin-bottom: 12px;",
+            div { class: "greeting-buttons",
                 button {
                     onclick: get_greeting,
                     disabled: loading(),
-                    style: "padding: 8px 16px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;",
+                    class: "greeting-button get",
                     if loading() { "Loading..." } else { "GET GREETING" }
                 }
 
                 button {
                     onclick: set_greeting,
                     disabled: loading(),
-                    style: "padding: 8px 16px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;",
+                    class: "greeting-button set",
                     if loading() { "Setting..." } else { "SET GREETING" }
                 }
             }
 
             if let Some(err) = error() {
-                div {
-                    style: "padding: 8px; background: #f8d7da; color: #721c24; border-radius: 4px; margin-bottom: 8px;",
+                div { class: "greeting-error",
                     "{err}"
                 }
             }
 
             if !message().is_empty() && error().is_none() {
-                div {
-                    style: "padding: 8px; background: #d4edda; color: #155724; border-radius: 4px;",
+                div { class: "greeting-message",
                     "{message}"
                 }
             }
