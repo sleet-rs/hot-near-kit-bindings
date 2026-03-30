@@ -1,5 +1,10 @@
 use dioxus::prelude::*;
 // =========================================
+// get_stored_network_id
+// save_network_id
+// toggle_network
+// NETWORK_STORAGE_KEY
+// =========================================
 /// Storage key for network ID in localStorage
 pub const NETWORK_STORAGE_KEY: &str = "network_id";
 
