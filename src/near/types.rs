@@ -162,7 +162,7 @@ impl Signature {
 // ============================================================================
 
 /// Transaction execution status.
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Default, Deserialize)]
 pub enum FinalExecutionStatus {
     #[default]
     NotStarted,
