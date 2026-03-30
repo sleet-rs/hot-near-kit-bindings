@@ -1,4 +1,4 @@
-import { near_connect_client } from "https://esm.sh/@sleet-js/near-kit-custom-client-setup-with-other-custom-functions@0.0.10/web";
+import { near_connect_client } from "https://esm.sh/@near-kit-tool-box/web";
 // ================================================
 // near_auth_status - returns "SignedIn" or "NotSignedIn"
 export async function near_auth_status() {
