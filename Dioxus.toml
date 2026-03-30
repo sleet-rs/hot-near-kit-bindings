@@ -3,7 +3,7 @@
 [web.app]
 
 # HTML title tag content
-title = "intear-wallet-connect-demo"
+title = "hot-near-kit-bindings-demo"
 
 # include `assets` in web platform
 [web.resource]
