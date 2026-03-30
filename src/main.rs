@@ -42,6 +42,11 @@ pub fn Hero() -> Element {
             }
 
             p {
+                a { 
+                    href: "https://github.com/sleet-rs/hot-near-kit-bindings",
+                    "github.com/sleet-rs/hot-near-kit-bindings"
+                }
+                br {  }
                 "copyright 2026 by sleet.near"
             }
         }
