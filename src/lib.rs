@@ -2,6 +2,7 @@
 // ===========================================
 pub mod near {
     pub mod near_kit_hot_connect;
+    pub mod types;
 }
 pub mod ui {
     pub mod button_login;
