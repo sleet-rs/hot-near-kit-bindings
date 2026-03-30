@@ -5,9 +5,6 @@
 # HTML title tag content
 title = "intear-wallet-connect-demo"
 
-# Use relative paths for Netlify deployment
-base_path = "./"
-
 # include `assets` in web platform
 [web.resource]
 
