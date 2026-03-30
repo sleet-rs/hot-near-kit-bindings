@@ -18,8 +18,8 @@ extern "C" {
 // ===========================================
 
 /// Helper to parse greeting_get_greeting result as String
-pub async fn get_greeting(greeting_contractId: &str) -> Result<String, String> {
-    let result = greeting_get_greeting(greeting_contractId)
+pub async fn get_greeting(greeting_contract_id: &str) -> Result<String, String> {
+    let result = greeting_get_greeting(greeting_contract_id)
         .await
         .map_err(|e| format!("{:?}", e))?;
     
@@ -28,10 +28,10 @@ pub async fn get_greeting(greeting_contractId: &str) -> Result<String, String> {
 
 /// Helper to parse greeting_set_greeting result as FinalExecutionOutcome
 pub async fn set_greeting(
-    greeting_contractId: &str,
+    greeting_contract_id: &str,
     greeting: &str,
 ) -> Result<FinalExecutionOutcome, String> {
-    let result = greeting_set_greeting(greeting_contractId, greeting)
+    let result = greeting_set_greeting(greeting_contract_id, greeting)
         .await
         .map_err(|e| format!("{:?}", e))?;
     

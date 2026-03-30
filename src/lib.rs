@@ -8,6 +8,7 @@ pub mod near {
 pub mod ui {
     pub mod button_login;
     pub mod button_network;
+    pub mod greeting;
 }
 pub mod logic {
     pub mod hello;
